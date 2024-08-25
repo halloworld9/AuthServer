@@ -1,0 +1,41 @@
+server:
+  port: 9000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,refresh"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+spring:
+  datasource:
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    show-sql: true
+    database: postgresql
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: debug
+    org.springframework.security: debug
+    org.springframework.security.oauth2: debug
